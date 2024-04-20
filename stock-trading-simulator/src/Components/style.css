@@ -1,0 +1,94 @@
+.center{
+    margin: 200px;
+}
+
+.active{
+    height: 2px;
+    width: 100%;
+    border-bottom: 2px solid #000;
+    transition: 0.3s;
+}
+
+.active:hover{
+    height: 2px;
+    width: 100%;
+    border-bottom: 2px solid #000;
+    transition: 0.3s;
+}
+
+.navbar-text:hover{
+    height: 2px;
+    border-bottom: 2px solid #000;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.border-bottom{
+    border-bottom: 2px solid #000;
+}   
+
+.navbar-collapse {
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+}
+  
+.navbar-toggler {
+  transition: transform 0.3s ease;
+}
+  
+.navbar-toggler.collapsed {
+  transform: rotate(0deg);
+}
+
+navbar-collapse {
+  transition: max-height 0.3s ease;
+  overflow: hidden;
+}
+  
+.navbar-toggler {
+  transition: transform 0.3s ease;
+}
+  
+.navbar-toggler.collapsed {
+  transform: rotate(0deg);
+}
+  
+.navbar {
+  transition: height 0.3s ease;
+}
+  
+.navbar.expanded {
+  height: auto !important;
+  transition: height 0.3s ease;
+}
+.navbar {
+  transition: height 0.3s ease;
+}
+  
+.navbar.collapsed {
+  height: 64px;
+  transition: height 0.3s ease;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #2b2f32;
+  padding: 20px 0;
+  text-align: center;
+  z-index: 1000; /* Ensure a higher z-index value */
+}
+
+@keyframes loading {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+  100% { content: "...."; }
+}
+
+.loading::after {
+  content: "";
+  animation: loading 1s steps(4, end) infinite;
+}
