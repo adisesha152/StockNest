@@ -8,23 +8,27 @@ const ChangeEmail = () => {
     const [newEmail, setNewEmail] = useState('');
     const [error, setError] = useState('');
     const [emailChangeSuccess, setEmailChangeSuccess] = useState(false);
+    const [verificationEmailSent, setVerificationEmailSent] = useState(false);
 
     const handleChangeEmail = async (e) => {
         e.preventDefault();
 
         try {
             const user = auth.currentUser;
-            
-            await sendEmailVerification(user);
-            
+
+            // Send verification email to new email address
             await updateEmail(user, newEmail);
+            await sendEmailVerification(user);
 
-            console.log('Email updated successfully')
+            // Update email address
 
+            // Set success flags
             setEmailChangeSuccess(true);
+            setVerificationEmailSent(true);
+            setError('');
         } catch (error) {
             setError(error.message);
-            console.error('Error sending verification email:', error.message);
+            console.error('Error changing email:', error);
         }
     };
 
@@ -40,9 +44,12 @@ const ChangeEmail = () => {
                 <div className='row justify-content-center'>
                     <div className='col-lg-6 col-md-8 col-sm-10 center'>
                         <div className='d-flex flex-column justify-content-center align-items-center text-center m-4 p-2'>
-                            <h1 className=''>Change Your Email</h1>
+                            <h1>Change Your Email</h1>
                             {error && <p className='text-danger'>{error}</p>}
-                            {emailChangeSuccess ? (
+                            {emailChangeSuccess && (
+                                <p className='text-success'>Your email has been changed successfully.</p>
+                            )}
+                            {verificationEmailSent ? (
                                 <p className='text-success'>An email has been sent to {newEmail} for verification.</p>
                             ) : (
                                 <form className='form' onSubmit={handleChangeEmail}>
@@ -59,7 +66,9 @@ const ChangeEmail = () => {
                                     </div>
                                 </form>
                             )}
-                            <p className='text-secondary mt-2'><Link to='/account' className='text-decoration-none text-secondary'>Go back to Account Settings</Link></p>
+                            <p className='text-secondary mt-2'>
+                                <Link to='/account' className='text-decoration-none text-secondary'>Go back to Account Settings</Link>
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -4,15 +4,10 @@ import { motion } from 'framer-motion';
 
 const Nav = () => {
   const location = useLocation();
-  const [collapsed, setCollapsed] = useState(true);
-
-  const toggleNavbar = () => {
-    setCollapsed(!collapsed);
-  };
 
   return (
     <motion.nav
-      className='navbar navbar-expand-lg navbar-light shadow'
+      className='navbar navbar-expand-lg navbar-light shadow rounded-5 p-3'
       initial={{ opacity: 0, y: -100 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -100 }}
@@ -22,18 +17,17 @@ const Nav = () => {
           <span className='bi bi-box-seam fs-4'> StockNest</span>
         </Link>
         <button
-          className={`navbar-toggler ${!collapsed ? 'collapsed' : ''}`}
-          type='button'
-          data-bs-toggle='collapse'
-          data-bs-target='#navbarNav'
-          aria-controls='navbarNav'
-          aria-expanded={!collapsed ? true : false}
-          aria-label='Toggle navigation'
-          onClick={toggleNavbar}
-        >
-          <span className='navbar-toggler-icon'></span>
-        </button>
-        <div className={`collapse navbar-collapse ${collapsed ? '' : 'show'}`} id='navbarNav'>
+            className='navbar-toggler'
+            type='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#navbarNav'
+            aria-controls='navbarNav'
+            aria-expanded='false'
+            aria-label='Toggle navigation'
+          >
+            <span className='navbar-toggler-icon'></span>
+          </button>
+        <div className='collapse navbar-collapse' id='navbarNav'>
           <ul className='navbar-nav ms-auto gap-3 '>
             <li className='nav-item'>
               <Link

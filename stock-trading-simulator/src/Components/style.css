@@ -78,7 +78,7 @@ navbar-collapse {
   background-color: #2b2f32;
   padding: 20px 0;
   text-align: center;
-  z-index: 1000; /* Ensure a higher z-index value */
+  z-index: 1000;
 }
 
 @keyframes loading {

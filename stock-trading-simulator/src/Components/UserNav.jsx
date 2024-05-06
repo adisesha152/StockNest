@@ -1,12 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const UserNav = ({ handleLogout }) => {
+  const navigate = useNavigate();
+  const Logout = () => {
+    axios.get('http://localhost:5000/logout')
+    .then(result => {
+      if(result.data === 'success'){
+        localStorage.clear()
+        navigate('/login')
+      }
+    })
+  }
   return (
     <div>
       <motion.nav
-        className='navbar navbar-expand-lg navbar-light shadow'
+        className='navbar navbar-expand-lg navbar-light shadow rounded-5 p-3'
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -38,18 +49,18 @@ const UserNav = ({ handleLogout }) => {
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/portfolio' className='nav-link text-decoration-none'>
+                <Link to='/investments' className='nav-link text-decoration-none'>
                   <motion.span
                     className='fs-5'
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    Portfolio
+                    Investments
                   </motion.span>
                 </Link>
               </li>
               <li className='nav-item'>
-                <Link to='/stocks' className='nav-link text-decoration-none'>
+                <Link to='/stockss' className='nav-link text-decoration-none'>
                   <motion.span
                     className='fs-5'
                     whileHover={{ scale: 1.1 }}
@@ -59,7 +70,18 @@ const UserNav = ({ handleLogout }) => {
                   </motion.span>
                 </Link>
               </li>
-              <li className='nav-item mt-1'>
+              <li className='nav-item'>
+                <Link to='/account' className='nav-link text-decoration-none'>
+                  <motion.span
+                    className='fs-5'
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    My Account
+                  </motion.span>
+                </Link>
+              </li>
+              <li className='nav-item mt-1' onClick={Logout}>
                 <Link to='/login'>
                   <motion.button
                     onClick={handleLogout}

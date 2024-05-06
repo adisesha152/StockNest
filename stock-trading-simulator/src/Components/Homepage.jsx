@@ -2,23 +2,17 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import { motion } from 'framer-motion';
+import Login from './Login';
+import './login.css'
 
 const Homepage = () => {
-  const [isOpen, setIsOpen] = useState({
-    faq1: false,
-    faq2: false,
-    faq3: false,
-    faq4: false,
-    faq5: false
-  });
 
-  const toggleAccordion = (faqKey) => {
-    setIsOpen(prevState => ({
-      ...prevState,
-      [faqKey]: !prevState[faqKey]
-    }));
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleLoginClick = () => {
+    setShowLoginModal(true);
   };
-
+  
   const pageVariants = {
     initial: {
       opacity: 0,
@@ -46,23 +40,28 @@ const Homepage = () => {
           <div className='row justify-content-center'>
             <div className='col-lg-6 col-md-8 col-sm-10 col-12 m-5'>
               <div className='p-2 m-3 text-center'>
-                <h1>Stock Trading Simulator</h1>
-                <p className='text-secondary'>Experience the thrill of the stock market without risk</p>
-                <Link to='/register'><button className='btn btn-success rounded-3'>Get Started</button></Link>
+                <h1 style={{fontSize: '80px', color: '#5E5E5E'}}>Stock Trading Simulator</h1>
+                <p className='text-secondary' style={{fontSize: '20px'}}>Experience the thrill of the stock market without risk.</p>
+                <Link to='/register'>
+                  <button className='btn btn-success rounded-3' onClick={handleLoginClick}>Get Started</button>
+                  </Link>
               </div>
               <div className='d-flex justify-content-center'>
-                <img src='/hero.png' height='400px' className='img-fluid'></img>
+                <img src='/hero.png' 
+                // className='img-fluid'
+                style={{width: '1100px', height: '100%'}}
+                ></img>
               </div>
-              <div className='d-flex justify-content-center'>
+              {/* <div className='d-flex justify-content-center'>
                 <div className='bi bi-arrow-down fs-1 m- p- d-none d-lg-block'></div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
         <div className=' m-4 p-4'>
-          <div className='d-flex justify-content-center'><i className='bi bi-magic fs-1'></i></div>
+          <div className='d-flex justify-content-center'><i className='bi bi-magic' style={{fontSize: '60px'}}></i></div>
           <div className='text-center m-2 p-2'>
-            <h1 className='fs-1'>Packed with <br></br>everything you need.</h1>
+            <p className='' style={{fontSize: '60px'}}>Packed with <br></br>everything you need.</p>
           </div>
         </div>
         <div className='d-flex row justify-content-center m-3 p-3 '>
@@ -136,27 +135,12 @@ const Homepage = () => {
 
       </div>
 
-    {/* <div className='bg-black rounded-5' style={{ height: '120vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '100px' }}>
+    <div className='rounded-5' style={{ height: '120vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '100px', background: '#202020' }}>
       <div className='container'>
         <div className='row justify-content-center'>
           <div className='col-lg-6 col-md-8 col-sm-10 col-12'>
             <div className='p-2 m-3 text-center'>
-              <h1 className='text-white'>Ready to get started?</h1>
-              <p className='text-secondary'>Sign up now and start trading stocks today</p>
-              <Link to='/register'><button className='btn btn-success rounded-3'>Get Started</button></Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> */}
-
-    <div className='bg-black rounded-5' style={{ height: '120vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '100px' }}>
-      <div className='container'>
-        <div className='row justify-content-center'>
-          <div className='col-lg-6 col-md-8 col-sm-10 col-12'>
-            <div className='p-2 m-3 text-center'>
-              <h1 className='text-white'>Open your account in a minute</h1>
-              {/* <p className='text-secondary'>Sign up now and start trading stocks today</p> */}
+              <p className='text-white' style={{fontSize: '70px'}}>Open your account in a minute</p>
               <Link to='/register'><button className='btn btn-success rounded-3 mt-4'>Get Started</button></Link>
             </div>
           </div>
@@ -164,7 +148,6 @@ const Homepage = () => {
       </div>
     </div>
 
-      {/* Additional Content Section */}
       <div className="container py-5 mt-5">
         <div className="row">
           <div className="col-md-12 text-center">
@@ -179,7 +162,7 @@ const Homepage = () => {
           whileTap={{ scale: 0.95 }}
           transition={{duration: 0.4}}
         >
-            <div className="card h-100 shadow-sm rounded-5 p-5">
+            <div className="card h-100 shadow-sm rounded-5 p-5 bg-light">
               <div className="card-body">
                 <h4 className="card-title">Realistic Simulation</h4>
                 <p className="card-text text-secondary">Experience the thrill of the stock market without risking real money through our realistic simulation.</p>
@@ -194,7 +177,7 @@ const Homepage = () => {
           whileTap={{ scale: 0.95 }}
           transition={{duration: 0.4}}
         >
-            <div className="card h-100 shadow-sm rounded-5 p-5">
+            <div className="card h-100 shadow-sm rounded-5 p-5 bg-light">
               <div className="card-body">
                 <h4 className="card-title">User-Friendly Interface</h4>
                 <p className="card-text">Our intuitive and easy-to-use interface makes trading effortless for users of all experience levels.</p>
@@ -208,7 +191,7 @@ const Homepage = () => {
           whileTap={{ scale: 0.95 }}
           transition={{duration: 0.4}}
         >
-            <div className="card h-100 shadow-sm rounded-5 p-5">
+            <div className="card h-100 shadow-sm rounded-5 p-5 bg-light">
               <div className="card-body">
                 <h4 className="card-title">Comprehensive Tools</h4>
                 <p className="card-text">Access advanced tools and resources to make informed trading decisions and stay ahead of the market.</p>
@@ -222,7 +205,7 @@ const Homepage = () => {
           whileTap={{ scale: 0.95 }}
           transition={{duration: 0.4}}
         >
-            <div className="card h-100 shadow-sm rounded-5 p-5">
+            <div className="card h-100 shadow-sm rounded-5 p-5 bg-light">
               <div className="card-body">
                 <h4 className="card-title">Community Support</h4>
                 <p className="card-text">Join a thriving community of traders to share insights, strategies, and experiences for mutual growth.</p>
@@ -236,7 +219,7 @@ const Homepage = () => {
           whileTap={{ scale: 0.95 }}
           transition={{duration: 0.4}}
         >
-            <div className="card h-100 shadow-sm rounded-5 p-5">
+            <div className="card h-100 shadow-sm rounded-5 p-5 bg-light">
               <div className="card-body ">
                 <h4 className="card-title">Customer Satisfaction</h4>
                 <p className="card-text">We prioritize customer satisfaction and continually improve our platform based on user feedback.</p>
@@ -250,7 +233,7 @@ const Homepage = () => {
           whileTap={{ scale: 0.95 }}
           transition={{duration: 0.4}}
         >
-            <div className="card h-100 shadow-sm rounded-5 p-5">
+            <div className="card h-100 shadow-sm rounded-5 p-5 bg-light">
               <div className="card-body">
                 <h4 className="card-title">Accessible Anywhere</h4>
                 <p className="card-text">Trade seamlessly on the go with our platform accessible on desktops, laptops, tablets, and smartphones.</p>
@@ -274,158 +257,95 @@ const Homepage = () => {
       </div>
       <div className="row mt-5">
         <div className="col-md-12 mb-5 ">
-          <div className="accordion" id="faqAccordion">
-            <div className="accordion-item">
-              <h2 className="accordion-header" id="headingOne">
-                <button
-                  className={`accordion-button ${isOpen.faq1 ? '' : 'collapsed'}`}
-                  type="button"
-                  onClick={() => toggleAccordion('faq1')}
-                  aria-expanded={isOpen.faq1}
-                  aria-controls="collapseOne"
-                >
-                  How do I sign up?
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                className={`accordion-collapse collapse ${isOpen.faq1 ? 'show' : ''}`}
-                aria-labelledby="headingOne"
-                data-bs-parent="#faqAccordion"
-              >
-                <div className="accordion-body">
-                  Signing up is easy! Simply click on the "Get Started" button and follow the prompts to create your account.
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header" id="headingTwo">
-                <button
-                  className={`accordion-button ${isOpen.faq2 ? '' : 'collapsed'}`}
-                  type="button"
-                  onClick={() => toggleAccordion('faq2')}
-                  aria-expanded={isOpen.faq2}
-                  aria-controls="collapseTwo"
-                >
-                  How does the simulator work?
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                className={`accordion-collapse collapse ${isOpen.faq2 ? 'show' : ''}`}
-                aria-labelledby="headingTwo"
-                data-bs-parent="#faqAccordion"
-              >
-                <div className="accordion-body">
-                  Our simulator replicates the real stock market using simulated data. You can buy, sell, and track stocks just like in real life, but without any financial risk.
-                </div>
-              </div>
-            </div>
-            <div className="accordion-item">
-              <h2 className="accordion-header" id="headingThree">
-                <button
-                  className={`accordion-button ${isOpen.faq3 ? '' : 'collapsed'}`}
-                  type="button"
-                  onClick={() => toggleAccordion('faq3')}
-                  aria-expanded={isOpen.faq3}
-                  aria-controls="collapseThree"
-                >
-                  Is there a fee for using the simulator?
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                className={`accordion-collapse collapse ${isOpen.faq3 ? 'show' : ''}`}
-                aria-labelledby="headingThree"
-                data-bs-parent="#faqAccordion"
-              >
-                <div className="accordion-body">
-                  No, our simulator is completely free to use. You can sign up and start trading stocks without any subscription fees or charges.
-                </div>
-              </div>
-            </div>
-            {/* Add more accordion items for additional FAQ entries */}
 
-            <div className="accordion-item">
-              <h2 className="accordion-header" id="headingThree">
-                <button
-                  className={`accordion-button ${isOpen.faq4 ? '' : 'collapsed'}`}
-                  type="button"
-                  onClick={() => toggleAccordion('faq4')}
-                  aria-expanded={isOpen.faq4}
-                  aria-controls="collapseThree"
-                >
-                  Can I trade real stocks on this platform?
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                How do I sign up?
                 </button>
               </h2>
-              <div
-                id="collapseThree"
-                className={`accordion-collapse collapse ${isOpen.faq4 ? 'show' : ''}`}
-                aria-labelledby="headingThree"
-                data-bs-parent="#faqAccordion"
-              >
-                <div className="accordion-body">
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                Signing up is easy! Simply click on the "Get Started" button and follow the prompts to create your account.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                How does the simulator work?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                Our simulator replicates the real stock market using simulated data. You can buy, sell, and track stocks just like in real life, but without any financial risk.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Is there a fee for using the simulator?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                No, our simulator is completely free to use. You can sign up and start trading stocks without any subscription fees or charges.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Can I trade real stocks on this platform?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
                 No, our platform is a simulation tool for educational purposes only. You cannot trade real stocks through our platform.
                 </div>
               </div>
             </div>
-
-            <div className="accordion-item">
-              <h2 className="accordion-header" id="headingThree">
-                <button
-                  className={`accordion-button ${isOpen.faq5 ? '' : 'collapsed'}`}
-                  type="button"
-                  onClick={() => toggleAccordion('faq5')}
-                  aria-expanded={isOpen.faq5}
-                  aria-controls="collapseThree"
-                >
-                  Is customer support available?
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Is customer support available?
                 </button>
               </h2>
-              <div
-                id="collapseThree"
-                className={`accordion-collapse collapse ${isOpen.faq5 ? 'show' : ''}`}
-                aria-labelledby="headingThree"
-                data-bs-parent="#faqAccordion"
-              >
-                <div className="accordion-body">
+              <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
                 Yes, we offer customer support to assist you with any questions or issues you may encounter while using our platform.
                 </div>
               </div>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
 </div>
 
-{/* <div className='bg-black rounded-5' style={{ height: '120vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '100px' }}>
+    <div className='rounded-5' style={{ height: '120vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '100px', background: '#202020' }}>
       <div className='container'>
         <div className='row justify-content-center'>
           <div className='col-lg-6 col-md-8 col-sm-10 col-12'>
             <div className='p-2 m-3 text-center'>
-              <h1 className='text-white'>Open your account in a minute</h1>
-              {/* <p className='text-secondary'>Sign up now and start trading stocks today</p> */}
-              {/* <Link to='/register'><button className='btn btn-success rounded-3 mt-4'>Get Started</button></Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> */}
-
-    <div className='bg-black rounded-5' style={{ height: '120vh', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '100px' }}>
-      <div className='container'>
-        <div className='row justify-content-center'>
-          <div className='col-lg-6 col-md-8 col-sm-10 col-12'>
-            <div className='p-2 m-3 text-center'>
-              <h1 className='text-white'>Ready to get started?</h1>
-              <p className='text-secondary'>Sign up now and start trading stocks today</p>
-              <Link to='/register'><button className='btn btn-success rounded-3'>Get Started</button></Link>
+              <p className='text-white' style={{fontSize: '70px'}}>Ready to get started?</p>
+              <p className='text-secondary' style={{fontSize: '20px'}}>Sign up now and start trading stocks today</p>
+              <Link to='/register' ><button className='btn btn-success rounded-3 ' style={{marginTop: '20px'}}>Get Started</button></Link>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    {showLoginModal && (
+        <div className="login-modal">
+          <div className="login-overlay"></div>
+          <Login setIsLoggedIn={() => {}} />
+        </div>
+      )}
 
 
       <Footer style={{ position: 'absolute', bottom: 0, marginTop: '100px' }} />

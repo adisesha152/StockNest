@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { getAuth, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import axios from 'axios';
 
 const Register = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ const Register = ({ setIsLoggedIn }) => {
 
     try {
       const auth = getAuth();
+      await axios.post('http://localhost:3000/auth/register', {email, password})
       await createUserWithEmailAndPassword(auth, email, password);
       console.log('User registered successfully');
       setIsLoggedIn(true);

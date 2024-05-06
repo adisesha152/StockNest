@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.19.1",
     "firebase": "^10.11.0",
+    "firebase-admin": "^12.1.0",
     "jsonwebtoken": "^9.0.2",
     "jws": "^4.0.0",
     "mongoose": "^8.3.1",

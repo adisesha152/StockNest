@@ -1,6 +1,6 @@
 // App.js
-import React, { useState } from 'react';
-import { Route, Routes, BrowserRouter, Navigate, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js'
@@ -15,18 +15,45 @@ import Dashboard from './Components/Dashboard';
 import ForgotPass from './Components/ForgotPass';
 import UserNav from './Components/UserNav'; // Import UserNav here
 import Account from './Components/Account';
-import Portfolio from './Components/Portfolio';
 import ChangeEmail from './Components/ChangeEmail';
 import ChangePassword from './Components/ChangePassword';
-import PhoneNumberLogin from './Components/PhoneNumberLogin';
 import Crypto from './Components/Crypto';
+import Loader from './Components/Loader';
+import UserStocks from './Components/UserStocks';
+import Stock from './Components/Stock';
+import Investments from './Components/Investments';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Update isLoggedIn state to false when logout button is clicked
+    setIsLoggedIn(false);
     return <Navigate to="/login" />;
+  }
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+  }, 3000)
+  return () => clearTimeout(timer);
+  }, [])
+
+  if(loading){
+    return <Loader/>
+  }
+
+  function AuthenticatedNav({ setIsLoggedIn, handleLogout }) {
+    return (
+      <UserNav handleLogout={handleLogout} />
+    );
+  }
+  
+  function UnauthenticatedNav() {
+    return (
+      <Nav setIsLoggedIn={setIsLoggedIn} />
+    );
   }
 
   return (
@@ -41,29 +68,30 @@ function App() {
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/forgotpass" element={<ForgotPass />} />
         <Route path="account" element={<Account/>} />
-        <Route path="/portfolio" element={<Portfolio/>} />
+        <Route path="/investments" element={<Investments/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="emailchange" element={<ChangeEmail/>} />
         <Route path="/passwordchange" element={<ChangePassword/>} />
-        <Route path="/signinphone" element={<PhoneNumberLogin/>} />
-
+        <Route path="/stockss" element={<UserStocks/>} />
+        <Route path="/stock" element={<Stock/>} />
+        {/* <Route exact path="/" component={UserStocks} /> */}
+        <Route path="/stock/:symbol" element={<Stock/>} />
       </Routes>
+      {/* <Footer/> */}
     </BrowserRouter>
   );
 }
 
-// Navigation bar for authenticated users
-function AuthenticatedNav({ setIsLoggedIn, handleLogout }) {
-  return (
-    <UserNav handleLogout={handleLogout} /> // Pass handleLogout to UserNav
-  );
-}
+// function AuthenticatedNav({ setIsLoggedIn, handleLogout }) {
+//   return (
+//     <UserNav handleLogout={handleLogout} />
+//   );
+// }
 
-// Navigation bar for unauthenticated users
-function UnauthenticatedNav() {
-  return (
-    <Nav />
-  );
-}
+// function UnauthenticatedNav() {
+//   return (
+//     <Nav setIsLoggedIn={setIsLoggedIn} />
+//   );
+// }
 
 export default App;

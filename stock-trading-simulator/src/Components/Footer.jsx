@@ -16,6 +16,7 @@ const Footer = () => {
               <li><Link to="/" className='text-decoration-none text-secondary'>Home</Link></li>
               <li><Link to="/news" className='text-decoration-none text-secondary'>News</Link></li>
               <li><Link to="/stocks" className='text-decoration-none text-secondary'>Stocks</Link></li>
+              <li><Link to="/crypto" className='text-decoration-none text-secondary'>Crypto</Link></li>
             </ul>
           </div>
           <div className="col-md-3">
@@ -32,10 +33,10 @@ const Footer = () => {
           <div className="col-md-12 text-center">
             <p>Follow us:</p>
             <ul className="list-inline">
-              <li className="list-inline-item"><a href="#"><i className="bi bi-facebook fs-4 m-2"></i></a></li>
-              <li className="list-inline-item"><a href="#"><i className="bi bi-twitter fs-4 m-2"></i></a></li>
-              <li className="list-inline-item"><a href="#"><i className="bi bi-instagram fs-4 m-2"></i></a></li>
-              <li className="list-inline-item"><a href="#"><i className="bi bi-linkedin fs-4 m-2"></i></a></li>
+              <li className="list-inline-item"><a href="#"><i className="bi bi-facebook fs-4 m-2" style={{color: 'black'}}></i></a></li>
+              <li className="list-inline-item"><a href="#"><i className="bi bi-twitter fs-4 m-2" style={{color: 'black'}}></i></a></li>
+              <li className="list-inline-item"><a href="#"><i className="bi bi-instagram fs-4 m-2" style={{color: 'black'}}></i></a></li>
+              <li className="list-inline-item"><a href="#"><i className="bi bi-linkedin fs-4 m-2" style={{color: 'black'}}></i></a></li>
             </ul>
           </div>
         </div>
