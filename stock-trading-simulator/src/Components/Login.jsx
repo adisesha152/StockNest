@@ -32,7 +32,6 @@ const Login = ({ setIsLoggedIn }) => {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       const user = auth.currentUser;
-      // await axios.post('http://localhost:3000/auth/login', { email, password });
       if (user) {
         setIsLoggedIn(true);
         setRedirectToDashboard(true);
@@ -49,8 +48,6 @@ const Login = ({ setIsLoggedIn }) => {
     }
   };
   
-  
-
   return (
     <motion.div
       initial={{ opacity: 0 }}

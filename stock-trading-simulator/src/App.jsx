@@ -22,6 +22,9 @@ import Loader from './Components/Loader';
 import UserStocks from './Components/UserStocks';
 import Stock from './Components/Stock';
 import Investments from './Components/Investments';
+import Wallet from './Components/Wallet';
+import Orders from './Components/Orders';
+import Watchlist from './Components/Watchlist';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -76,6 +79,9 @@ function App() {
         <Route path="/stock" element={<Stock/>} />
         {/* <Route exact path="/" component={UserStocks} /> */}
         <Route path="/stock/:symbol" element={<Stock/>} />
+        <Route path="/wallet" element={<Wallet/>} />
+        <Route path="/orders" element={<Orders/>} />
+        <Route path="/watchlist" element={<Watchlist/>} />
       </Routes>
       {/* <Footer/> */}
     </BrowserRouter>

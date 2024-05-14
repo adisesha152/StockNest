@@ -1,8 +1,12 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 
 const Investments = () => {
+  
   return (
-    <div>Investments</div>
+    <div>
+      
+    </div>
   )
 }
 

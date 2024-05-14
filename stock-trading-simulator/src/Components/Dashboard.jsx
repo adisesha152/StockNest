@@ -5,7 +5,7 @@ import StocksTable from './StocksTable';
 import Stocks from './Stocks';
 import { getAuth } from 'firebase/auth';
 import UserStocks from './UserStocks';
-import Wishlist from './Wishlist';
+import Wishlist from './Watchlist';
 
 const Dashboard = () => {
   const auth = getAuth();
@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   return (
     <motion.div
-      className="container"
+      className=""
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}

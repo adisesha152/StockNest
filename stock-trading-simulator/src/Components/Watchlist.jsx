@@ -8,7 +8,11 @@ import { Typography } from '@mui/material';
 import Loader from './Loader';
 import StocksTable from './StocksTable';
 
-const Wishlist = () => {
+const Watchlist = () => {
+    const [topNSEStocks, setTopNSEStocks] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
 
     if (loading) {
         return <Loader/>;
@@ -79,4 +83,4 @@ const Wishlist = () => {
   )
 }
 
-export default Wishlist
+export default Watchlist

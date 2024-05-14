@@ -19,9 +19,10 @@ const Stock = () => {
   const params = useParams();
   const [walletBalance, setWalletBalance] = useState(null);
   const [buyQty, setBuyQty] = useState('');
-  const [buyPrice, setBuyPrice] = useState('');
   const [sellQty, setSellQty] = useState('');
-  const [sellPrice, setSellPrice] = useState('');
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [transactionDetails, setTransactionDetails] = useState(null);
+  const [orderType, setOrderType] = useState(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -157,14 +158,43 @@ const Stock = () => {
     return <div>Error: {error}</div>;
   }
 
-  const handleBuy = () => {
-    // Logic for buy action
-    console.log('Buy:', buyQty, buyPrice);
+  const handleBuy = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/auth/buy', {
+        email: user.email,
+        stockSymbol: companyDetails.symbol,
+        company: companyDetails.companyName,
+        quantity: buyQty,
+        price: companyDetails.price,
+      });
+      console.log('Buy response:', response.data);
+      setWalletBalance(walletBalance - (buyQty * companyDetails.price));
+      setTransactionDetails(response.data);
+      setOrderType('Buy');
+      console.log(response.data);
+      setSuccessModalOpen(true);
+    } catch (error) {
+      console.error('Error buying stock:', error);
+    }
   };
-
-  const handleSell = () => {
-    // Logic for sell action
-    console.log('Sell:', sellQty, sellPrice);
+  
+  const handleSell = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3000/auth/sell', {
+        email: user.email,
+        stockSymbol: companyDetails.symbol,
+        company: companyDetails.companyName,
+        quantity: sellQty,
+        price: companyDetails.price,
+      });
+      console.log('Sell response:', response.data);
+      setWalletBalance(walletBalance + (sellQty * companyDetails.price));
+      setOrderType('Sell');
+    } catch (error) {
+      console.error('Error selling stock:', error);
+    }
   };
 
   return (
@@ -227,38 +257,99 @@ const Stock = () => {
         </div>
       </div>
       <div className=''>
-        <div className='shadow rounded-5 p-5 ' style={{ width: '450px', marginLeft: '50px', marginTop: '150px' }}>
-          {/* <h4>Buy / Sell</h4> */}
+        <div className='shadow rounded-5 p-5 ' style={{ width: '450px', marginLeft: '50px', marginTop: '120px' }}>
           {stockData.historical && (
             <>
-              <p className='fs-4'>{companyDetails.companyName}</p>
-              <p className=''>${companyDetails.price} <small>{companyDetails.changes}</small></p>
-              <div>
-                <form className=''>
-                  <div className='' style={{marginTop: '20px'}}>
+            <p className='fs-4'>{companyDetails.companyName}</p>
+            <p className=''>${companyDetails.price} <small>{companyDetails.changes}</small></p>
+            <nav>
+              <div className='nav nav-tabs' id='nav-tab' role='tablist'>
+                <button className='nav-link active' id='nav-buy-tab' data-bs-toggle='tab' data-bs-target='#nav-buy' type='button' role='tab' aria-controls='nav-buy' aria-selected='true'>Buy</button>
+                <button className='nav-link' id='nav-sell-tab' data-bs-toggle='tab' data-bs-target='#nav-sell' type='button' role='tab' aria-controls='nav-sell' aria-selected='false'>Sell</button>
+              </div>
+            </nav>
+            <div className='tab-content'>
+              <div className='tab-pane fad show active' id='nav-buy' role='tabpanel' aria-labelledby="nav-buy-tab">
+                <form>
+                  <div style={{marginTop: '20px'}}>
                     <label>Qty</label>
-                    <input type='number' className='form-control' value={buyQty} onChange={(e) => setBuyQty(e.target.value)}></input>
+                    <input type='number' className='form-control' value={buyQty} onChange={(e) => setBuyQty(e.target.value)} />
                   </div>
-                  <div className='' style={{marginTop: '20px'}}>
+                  <div style={{marginTop: '20px'}}>
                     <label>Price</label>
-                    {/* <input type='number' className='form-control' value={buyPrice} onChange={(e) => setBuyPrice(e.target.value)}></input> */}
                     <p className='form-control'>{companyDetails.price}</p>
                   </div>
+                  <div className='d-flex justify-content-between' style={{marginTop: '10px'}}>
+              <p>Balance: ${walletBalance}</p>
+              <p>Required: ${buyQty * companyDetails.price}</p>
+            </div>
+            <button className="btn btn-success" style={{width: '355px'}} onClick={handleBuy}>Buy</button>
                 </form>
               </div>
-              <div className='d-flex justify-content-between' style={{marginTop: '10px'}}>
-                <p>Balance: ${walletBalance}</p>
-                <p>Required: ${buyQty * companyDetails.price}</p>
+              <div className='tab-pane fad' id='nav-sell' role='tabpanel' aria-labelledby="nav-sell-tab">
+                <form>
+                  <div style={{marginTop: '20px'}}>
+                    <label>Qty</label>
+                    <input type='number' className='form-control' value={sellQty} onChange={(e) => setSellQty(e.target.value)} />
+                  </div>
+                  <div style={{marginTop: '20px'}}>
+                    <label>Price</label>
+                    <p className='form-control'>{companyDetails.price}</p>
+                  </div><div className='d-flex justify-content-between' style={{marginTop: '10px'}}>
+              <p>Balance: ${walletBalance}</p>
+              <p>Required: ${buyQty * companyDetails.price}</p>
+            </div>
+            <button className="btn btn-dange" style={{width: '355px', border: '1px solid black'}} onClick={handleSell}>Sell</button>
+                </form>
               </div>
-            </>
+            </div>
+            {/* <div className='d-flex justify-content-between' style={{marginTop: '10px'}}>
+              <p>Balance: ${walletBalance}</p>
+              <p>Required: ${buyQty * companyDetails.price}</p>
+            </div>
+            <div className='tab-pane fade show active' id='nav-buy' role='tabpanel' aria-labelledby="nav-buy-tab">
+              <button className="btn btn-dark" style={{width: '150px'}} onClick={handleBuy}>Buy</button>
+            </div>
+            <div className='tab-pane fade' id='nav-sell' role='tabpanel' aria-labelledby="nav-sell-tab">
+              <button className="btn btn-dange" style={{width: '150px', border: '1px solid black'}} onClick={handleSell}>Sell</button>
+            </div> */}
+          </>          
           )}
-          <div className="d-flex justify-content-between">
+          {/* <div className="d-flex justify-content-between">
             <button className="btn btn-dark" style={{width: '150px'}} onClick={handleBuy}>Buy</button>
             <button className="btn btn-dange" style={{width: '150px', border: '1px solid black'}} onClick={handleSell}>Sell</button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
+    {successModalOpen && (
+        <div className="modal fade show" tabIndex="-1" style={{ display: 'block', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title text-succes">Success!</h5>
+                {/* <button type="button" className="btn-close" aria-label="Close" onClick={() => setSuccessModalOpen(false)}></button> */}
+              </div>
+              <div className="modal-body">
+                {/* Render transaction details */}
+                {transactionDetails && (
+                  <div>
+                    <p className='text-success'>Stock purchased successfully!</p>
+                    {/* <p>Transaction ID: {transactionDetails.transactionId}</p> */}
+                    <p>Order Type: {orderType}</p>
+                    <p>Price: ${companyDetails.price}</p>
+                    <p>Quantity: {buyQty}</p>
+                    {/* Render other transaction details as needed */}
+                  </div>
+                )}
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-success" onClick={() => setSuccessModalOpen(false)}>Done</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <Footer/>
       </div>
   );
