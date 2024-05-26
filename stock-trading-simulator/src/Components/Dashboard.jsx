@@ -19,7 +19,7 @@ const Dashboard = () => {
       exit={{ opacity: 0, y: -50 }}
       transition={{ duration: 0.5 }}
     >
-      <p className="fs-3" style={{marginTop: '40px', marginLeft: '60px'}}>Welcome {user.displayName},</p>
+      {/* <p className="fs-3" style={{marginTop: '40px', marginLeft: '60px'}}>Welcome {user.displayName},</p> */}
       <UserStocks/>
       {/* <Wishlist/> */}
       <Stocks/>
