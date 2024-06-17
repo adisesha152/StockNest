@@ -1,7 +1,6 @@
 // App.js
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
-import { SpeedInsights } from "@vercel/speed-insights/next"
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js'
