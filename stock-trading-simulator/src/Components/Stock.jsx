@@ -181,6 +181,7 @@ const Stock = () => {
   
   const handleSell = async (e) => {
     e.preventDefault();
+    // console.log(sellQty)
     try {
       const response = await axios.post('http://localhost:3000/auth/sell', {
         email: user.email,
@@ -189,6 +190,7 @@ const Stock = () => {
         quantity: sellQty,
         price: companyDetails.price,
       });
+      // console.log(sellQty)
       console.log('Sell response:', response.data);
       setWalletBalance(walletBalance + (sellQty * companyDetails.price));
       setOrderType('Sell');
@@ -327,19 +329,21 @@ const Stock = () => {
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title text-succes">Success!</h5>
+                
+                <br></br>
+                <h5 className="modal-title text-succes"><i className='bi bi-check-circle fs-3'></i> <span>Success!</span></h5>
                 {/* <button type="button" className="btn-close" aria-label="Close" onClick={() => setSuccessModalOpen(false)}></button> */}
               </div>
               <div className="modal-body">
                 {/* Render transaction details */}
                 {transactionDetails && (
                   <div>
+                    {/* <i className='bi bi-check-circle fs-3'></i> */}
                     <p className='text-success'>Stock purchased successfully!</p>
                     {/* <p>Transaction ID: {transactionDetails.transactionId}</p> */}
                     <p>Order Type: {orderType}</p>
                     <p>Price: ${companyDetails.price}</p>
                     <p>Quantity: {buyQty}</p>
-                    {/* Render other transaction details as needed */}
                   </div>
                 )}
               </div>

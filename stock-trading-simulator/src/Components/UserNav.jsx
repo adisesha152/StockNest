@@ -155,7 +155,7 @@ const UserNav = ({ handleLogout }) => {
                   </motion.span>
                 </Link>
               </li>
-              <li className='nav-item'>
+              <li className='nav-item' style={{marginLeft: '7px'}}>
                 <Link to='/wallet' className='nav-link text-decoration-none'>
                   <motion.span
                     className='fs-5'
@@ -167,7 +167,7 @@ const UserNav = ({ handleLogout }) => {
                 </Link>
               </li>
               <li class="nav-item dropdown">
-                <img class="nav-link dropdown-toggle rounded-5" src='' style={{width: '55px'}} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onError={handleImageError}/>
+                <img class="nav-link dropdown-toggle rounded-5" src='' style={{width: '50px', marginTop: 'px'}} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" onError={handleImageError}/>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                   <li>
                     <Link to='/orders' className='dropdown-item'>
