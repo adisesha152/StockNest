@@ -139,5 +139,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Thanks to the contributors and the open-source community for their invaluable work.
 - Icons by Bootstrap Icons.
+- News by NewsAPI
+- Stocks by Financial Modelling Prep
+- Crypto by CoinGecko
 
 ---
