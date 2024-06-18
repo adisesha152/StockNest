@@ -75,7 +75,7 @@ The application should now be running on `http://localhost:3000`.
 Here's a brief overview of the project's structure:
 
 ```
-stocknest/
+stock-trading-simulator/
 │
 ├── public/
 │   ├── index.html
