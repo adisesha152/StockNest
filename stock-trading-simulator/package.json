@@ -20,7 +20,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@react-firebase/auth": "^0.2.10",
     "@vercel/speed-insights": "^1.0.12",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.2",
